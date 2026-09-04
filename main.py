@@ -11,7 +11,7 @@ product_manager = ProductManager(product_data)
 
 while True:
     try:
-        x=int(input("Enter a number: 0-exit, 1-add product, 2-remove product, 3-view products: "))
+        x=int(input("Enter a number: 0-exit, 1-add product, 2-remove product, 3-view products, 4-search by name: "))
     except ValueError:
         print("Invalid input. Please enter a number.")
         continue
@@ -40,7 +40,11 @@ while True:
     elif x==3:
         product_manager.print_products()
 
-print(f"Total products: {Product.get_total_products()}")
+    elif x==4:
+        name = input("Enter name of product to search: ")
+        print(product_manager.search_by_name(name))
+
+print(f"Total products: {product_manager.get_total_products()}")
 
 with open("products_file.json", "w") as f:
-    json.dump([p.__dict__ for p in product_manager.products], f, indent=4)
+    json.dump([p.to_dict() for p in product_manager.products], f, indent=4)

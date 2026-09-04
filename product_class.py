@@ -1,13 +1,10 @@
-class Product():
-
-    total_products = 0
+class Product:
     
     def __init__(self, name, price, category, description):
         self.name = name
         self.price = price
         self.category = category
         self.description = description
-        Product.total_products += 1
 
 
     @property
@@ -26,8 +23,12 @@ class Product():
     def __repr__(self):
         return f"Product(name={self.name}, price={self.price}, category={self.category}, description={self.description})"
 
-    @classmethod
-    def get_total_products(cls):
-        return cls.total_products
+    def to_dict(self):
+        return{
+            'name': self.name,
+            'price': self.price,
+            'category': self.category,
+            'description': self.description
+            }
 
         

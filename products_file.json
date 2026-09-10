@@ -1,1 +1,14 @@
-[]
+[
+    {
+        "name": "sad",
+        "price": 5.0,
+        "category": "ds",
+        "description": "sa"
+    },
+    {
+        "name": "das",
+        "price": 6.0,
+        "category": "ds",
+        "description": "sa"
+    }
+]

@@ -11,7 +11,7 @@ product_manager = ProductManager(product_data)
 
 while True:
     try:
-        x=int(input("Enter a number: 0-exit, 1-add product, 2-remove product, 3-view products, 4-search by name: "))
+        x=int(input("Enter a number: 0-exit, 1-add product, 2-remove product, 3-view products, 4-search by name, 5-search by category: "))
     except ValueError:
         print("Invalid input. Please enter a number.")
         continue
@@ -43,6 +43,19 @@ while True:
     elif x==4:
         name = input("Enter name of product to search: ")
         print(product_manager.search_by_name(name))
+
+    elif x==5:
+        category = input("Enter category of product to search: ")
+        print(product_manager.search_by_category(category))
+
+    elif x==6:
+        try:
+            lower = float(input("Enter lower price limit: "))
+            upper = float(input("Enter upper price limit: "))
+            print(product_manager.search_by_price_range(lower, upper))
+        except ValueError:
+            print("Invalid input for price. Please enter a number.")
+            continue
 
 print(f"Total products: {product_manager.get_total_products()}")
 

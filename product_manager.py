@@ -46,6 +46,26 @@ class ProductManager:
                 return product
         return (f"Product with name '{name}' not found.")
 
+    def search_by_category(self, category):
+        products_by_category = []
+        for product in self.products:
+            if product.category == category:
+                products_by_category.append(product)
+        if products_by_category:
+            return products_by_category
+        else:
+            return (f"Product with category '{category}' not found.")
+
+    def search_by_price_range(self, lower, upper):
+        products_by_price = []
+        for product in self.products:
+            if product.price>=lower and product.price<=upper:
+                products_by_price.append(product)
+        if products_by_price:
+            return products_by_price
+        else:
+            return (f"Product with price range '{lower}'- '{upper}' not found.")
+
     @classmethod
     def get_total_products(cls):
         return cls.total_products

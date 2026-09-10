@@ -2,7 +2,6 @@ from product_class import Product
  
 class ProductManager:
 
-    total_products = 0
 
     def __init__(self, products_data=None):
         self.products = []
@@ -35,15 +34,13 @@ class ProductManager:
                 return True
         return False
 
-    def print_products(self):
-        print("Products:")
-        for product in self.products:
-            print(product)
-
     def print_products(self, product_list=None):
-            print("Products:")
-            for product in product_list:
-                print(product)
+        if product_list is None:
+            product_list = self.products
+
+        print("Products:")
+        for product in product_list:
+            print(product)
 
     def search_by_name(self, name):
         for product in self.products:
@@ -71,6 +68,40 @@ class ProductManager:
         else:
             return (f"Product with price range '{lower}'- '{upper}' not found.")
 
-    @classmethod
-    def get_total_products(cls):
-        return cls.total_products
+
+    def update_product(self):
+        print("Products:")
+
+        for i, product in enumerate(self.products, start=1):
+            print(f"{i}. {product.name} - {product.price} - {product.category}")
+
+        try:
+            choice = int(input("Enter the number of the product you want to update: ")) - 1
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
+        if 0 <= choice < len(self.products):
+
+            
+            try:
+                to_change = int(input("What to change: 1-name, 2-price, 3-category:"))
+            except ValueError:
+                print("Invalid input. Please enter a number.")
+                return
+
+            if to_change == 1:
+                updated_value = input("Enter name:")
+                self.products[choice].name = updated_value
+            elif to_change == 2:
+                updated_value = float(input("Enter price:"))
+                self.products[choice].price = updated_value
+            elif to_change == 3:
+                updated_value = input("Enter category:")
+                self.products[choice].category = updated_value
+            else:
+                print("Invalid choice. Please try again.")
+        else:
+            print("Invalid choice. Please try again.")
+
+    def get_total_products(self):
+        return len(self.products)

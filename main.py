@@ -11,7 +11,8 @@ product_manager = ProductManager(product_data)
 
 while True:
     try:
-        x=int(input("Enter a number: 0-exit, 1-add product, 2-remove product, 3-view products, 4-search by name, 5-search by category: "))
+        x=int(input("Enter a number: 0-exit, 1-add product, 2-remove product, 3-view products, 4-search by name, 5-search by category, " \
+        "6-search by price range, 7-update product: "))
     except ValueError:
         print("Invalid input. Please enter a number.")
         continue
@@ -56,6 +57,8 @@ while True:
         except ValueError:
             print("Invalid input for price. Please enter a number.")
             continue
+    elif x==7:
+        product_manager.update_product()
 
 print(f"Total products: {product_manager.get_total_products()}")
 

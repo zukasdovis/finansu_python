@@ -1,4 +1,4 @@
-saut ieskojima pagal kategorija ir pagal kaina
+----------------------------saut ieskojima pagal kategorija ir pagal kaina
 padaryt produktu koregacija
 sort
 paziureti kategorijas

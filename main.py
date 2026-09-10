@@ -46,13 +46,13 @@ while True:
 
     elif x==5:
         category = input("Enter category of product to search: ")
-        print(product_manager.search_by_category(category))
+        product_manager.search_by_category(category)
 
     elif x==6:
         try:
             lower = float(input("Enter lower price limit: "))
             upper = float(input("Enter upper price limit: "))
-            print(product_manager.search_by_price_range(lower, upper))
+            product_manager.search_by_price_range(lower, upper)
         except ValueError:
             print("Invalid input for price. Please enter a number.")
             continue

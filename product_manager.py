@@ -40,6 +40,11 @@ class ProductManager:
         for product in self.products:
             print(product)
 
+    def print_products(self, product_list=None):
+            print("Products:")
+            for product in product_list:
+                print(product)
+
     def search_by_name(self, name):
         for product in self.products:
             if product.name == name:
@@ -52,7 +57,7 @@ class ProductManager:
             if product.category == category:
                 products_by_category.append(product)
         if products_by_category:
-            return products_by_category
+            return self.print_products(products_by_category)
         else:
             return (f"Product with category '{category}' not found.")
 
@@ -62,7 +67,7 @@ class ProductManager:
             if product.price>=lower and product.price<=upper:
                 products_by_price.append(product)
         if products_by_price:
-            return products_by_price
+            return self.print_products(products_by_price)
         else:
             return (f"Product with price range '{lower}'- '{upper}' not found.")
 

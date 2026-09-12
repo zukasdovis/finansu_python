@@ -21,8 +21,12 @@ class Product:
         return f"Name: {self.name}, Price: {self.price}, Category: {self.category}, Description: {self.description}"
 
     def __repr__(self):
-        return f"Product(name={self.name}, price={self.price}, category={self.category}, description={self.description})"
-
+        return (
+        f"Product(name={self.name!r}, "
+        f"price={self.price!r}, "
+        f"category={self.category!r}, "
+        f"description={self.description!r})"
+        )
     def to_dict(self):
         return{
             'name': self.name,

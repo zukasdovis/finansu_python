@@ -44,7 +44,7 @@ while True:
 
     elif x==4:
         name = input("Enter name of product to search: ")
-        print(product_manager.search_by_name(name))
+        product_manager.search_by_name(name)
 
     elif x==5:
         category = input("Enter category of product to search: ")
@@ -62,8 +62,13 @@ while True:
         product_manager.update_product()
 
     elif x==8:
-        choice = int(input("Enter how you want to sort: 1-increasing by name, 2-decreasing by name, 3-increasing by price, 4-decreasing by price,\n " \
-        "5-increasing by category, 6-decreasing by category: "))
+        try:
+            choice = int(input("Enter how you want to sort: 1-increasing by name, 2-decreasing by name, 3-increasing by price, 4-decreasing by price,\n " \
+            "5-increasing by category, 6-decreasing by category: "))
+
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+            continue
 
         if choice == 1:
             product_manager.sort_by_name_incr()

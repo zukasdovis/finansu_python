@@ -18,19 +18,16 @@ class ProductManager:
                     self.products.append(product)
                 elif isinstance(product_dict, Product):
                     self.products.append(product_dict)
-            total_products = len(self.products)
 
     
     
     def add_product(self, product):
         self.products.append(product)
-        self.total_products+=1
 
     def remove_product(self, name):
         for i in range(len(self.products)):
             if self.products[len(self.products) - 1 - i].name == name:
                 del self.products[len(self.products) - 1 - i]
-                self.total_products -= 1
                 return True
         return False
 
@@ -45,7 +42,7 @@ class ProductManager:
     def search_by_name(self, name):
         for product in self.products:
             if product.name == name:
-                return product
+                return self.print_products([product])
         return (f"Product with name '{name}' not found.")
 
     def search_by_category(self, category):
@@ -79,6 +76,7 @@ class ProductManager:
             choice = int(input("Enter the number of the product you want to update: ")) - 1
         except ValueError:
             print("Invalid input. Please enter a number.")
+            return
 
         if 0 <= choice < len(self.products):
 

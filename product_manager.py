@@ -103,5 +103,20 @@ class ProductManager:
         else:
             print("Invalid choice. Please try again.")
 
+    def sort_by_name_incr(self):
+        self.products.sort(key=lambda product: product.name)  
+    def sort_by_name_decr(self):
+        self.products.sort(key=lambda product: product.name, reverse=True) 
+        
+    def sort_by_price_incr(self):
+        self.products.sort(key=lambda product: product.price)  
+    def sort_by_price_decr(self):
+        self.products.sort(key=lambda product: product.price, reverse=True)  
+
+    def sort_by_category_incr(self):
+        self.products.sort(key=lambda product: product.category)  
+    def sort_by_category_decr(self):
+        self.products.sort(key=lambda product: product.category, reverse=True)  
+    
     def get_total_products(self):
         return len(self.products)

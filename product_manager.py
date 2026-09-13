@@ -1,3 +1,6 @@
+from importlib.resources import path
+import json
+from pathlib import Path
 from product_class import Product
  
 class ProductManager:
@@ -118,3 +121,31 @@ class ProductManager:
     
     def get_total_products(self) -> int:
         return len(self.products)
+    
+    def load_from_file(self, path: Path) -> None:
+        if not path.exists():
+            self.products = []
+            return
+
+        with path.open("r") as f:
+            content = f.read()
+
+        if not content.strip():
+            self.products = []
+            return
+
+        data = json.loads(content)
+
+        self.products = [Product.from_dict(p) for p in data]
+
+
+    def save_to_file(self, path: Path) -> None:
+        if not path.parent.exists():
+            path.parent.mkdir(parents=True, exist_ok=True)
+
+        with path.open("w") as f:
+            json.dump(
+            [p.to_dict() for p in self.products],
+            f,
+            indent=4
+            )

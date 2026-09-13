@@ -6,13 +6,9 @@ from product_manager import ProductManager
 
 file_path = Path("products_file.json")
 
-if file_path.exists():
-    with file_path.open("r") as f:
-        product_data = json.load(f)
-else:
-    product_data = []
+product_manager = ProductManager([])
 
-product_manager = ProductManager(product_data)
+product_manager.load_from_file(file_path)
 
 
 while True:
@@ -91,9 +87,4 @@ while True:
 
 print(f"Total products: {product_manager.get_total_products()}")
 
-with file_path.open("w") as f:
-    json.dump(
-        [p.to_dict() for p in product_manager.products],
-        f,
-        indent=4
-    )
+product_manager.save_to_file(file_path)

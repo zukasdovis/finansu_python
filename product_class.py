@@ -28,4 +28,11 @@ class Product:
             'description': self.description
             }
 
-        
+    @classmethod
+    def from_dict(cls, data):
+        return cls(
+            data["name"],
+            data["price"],
+            data["category"],
+            data["description"]
+    )    

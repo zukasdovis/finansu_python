@@ -1,14 +1,8 @@
 [
     {
-        "name": "sad",
+        "name": "das",
         "price": 5.0,
         "category": "ds",
-        "description": "sa"
-    },
-    {
-        "name": "das",
-        "price": 7.0,
-        "category": "ds",
-        "description": "sa"
+        "description": "as"
     }
 ]

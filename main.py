@@ -1,10 +1,16 @@
 import json
+from pathlib import Path
 
 from product_class import Product
 from product_manager import ProductManager
 
-with open("products_file.json", "r") as f:
-    product_data = json.load(f)
+file_path = Path("products_file.json")
+
+if file_path.exists():
+    with file_path.open("r") as f:
+        product_data = json.load(f)
+else:
+    product_data = []
 
 product_manager = ProductManager(product_data)
 
@@ -44,17 +50,17 @@ while True:
 
     elif x==4:
         name = input("Enter name of product to search: ")
-        product_manager.search_by_name(name)
+        print(product_manager.search_by_name(name))
 
     elif x==5:
         category = input("Enter category of product to search: ")
-        product_manager.search_by_category(category)
+        print(product_manager.search_by_category(category))
 
     elif x==6:
         try:
             lower = float(input("Enter lower price limit: "))
             upper = float(input("Enter upper price limit: "))
-            product_manager.search_by_price_range(lower, upper)
+            print(product_manager.search_by_price_range(lower, upper))
         except ValueError:
             print("Invalid input for price. Please enter a number.")
             continue
@@ -68,7 +74,7 @@ while True:
 
         except ValueError:
             print("Invalid input. Please enter a number.")
-            continue
+            break
 
         if choice == 1:
             product_manager.sort_by_name_incr()
@@ -85,5 +91,9 @@ while True:
 
 print(f"Total products: {product_manager.get_total_products()}")
 
-with open("products_file.json", "w") as f:
-    json.dump([p.to_dict() for p in product_manager.products], f, indent=4)
+with file_path.open("w") as f:
+    json.dump(
+        [p.to_dict() for p in product_manager.products],
+        f,
+        indent=4
+    )

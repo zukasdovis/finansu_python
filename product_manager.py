@@ -3,17 +3,17 @@ from product_class import Product
 class ProductManager:
 
 
-    def __init__(self, products_data=None):
-        self.products = []
+    def __init__(self, products_data: list[Product] | None = None):
+        self.products: list[Product] = []
         
         if products_data:
             for product_dict in products_data:
                 if isinstance(product_dict, dict):
                     product = Product(
-                        product_dict.get('name'),
-                        product_dict.get('price'),
-                        product_dict.get('category'),
-                        product_dict.get('description')
+                        name=product_dict.get('name'),
+                        price=product_dict.get('price'),
+                        category=product_dict.get('category'),
+                        description=product_dict.get('description')
                     )
                     self.products.append(product)
                 elif isinstance(product_dict, Product):
@@ -21,10 +21,10 @@ class ProductManager:
 
     
     
-    def add_product(self, product):
+    def add_product(self, product: Product) -> None:
         self.products.append(product)
 
-    def remove_product(self, name):
+    def remove_product(self, name: str) -> bool:
         for i in range(len(self.products)):
             if self.products[len(self.products) - 1 - i].name == name:
                 del self.products[len(self.products) - 1 - i]
@@ -39,31 +39,31 @@ class ProductManager:
         for product in product_list:
             print(product)
 
-    def search_by_name(self, name):
+    def search_by_name(self, name: str) -> Product | None:
         for product in self.products:
             if product.name == name:
-                return self.print_products([product])
-        return (f"Product with name '{name}' not found.")
+                return product
+        return None
 
-    def search_by_category(self, category):
+    def search_by_category(self, category: str) -> list[Product] | None:
         products_by_category = []
         for product in self.products:
             if product.category == category:
                 products_by_category.append(product)
         if products_by_category:
-            return self.print_products(products_by_category)
+            return products_by_category
         else:
-            return (f"Product with category '{category}' not found.")
+            return None
 
-    def search_by_price_range(self, lower, upper):
+    def search_by_price_range(self, lower: float, upper: float) -> list[Product] | None:
         products_by_price = []
         for product in self.products:
             if product.price>=lower and product.price<=upper:
                 products_by_price.append(product)
         if products_by_price:
-            return self.print_products(products_by_price)
+            return products_by_price
         else:
-            return (f"Product with price range '{lower}'- '{upper}' not found.")
+            return None
 
 
     def update_product(self):
@@ -116,5 +116,5 @@ class ProductManager:
     def sort_by_category_decr(self):
         self.products.sort(key=lambda product: product.category, reverse=True)  
     
-    def get_total_products(self):
+    def get_total_products(self) -> int:
         return len(self.products)

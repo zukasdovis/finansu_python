@@ -9,6 +9,9 @@ class Product:
 
 
     def __post_init__(self):
+        if not isinstance(self.price, (int,float)):
+            raise ValueError("Price must be a number")
+        
         if self.price < 0:
             raise ValueError("Price cannot be negative")
 
@@ -35,4 +38,4 @@ class Product:
             data["price"],
             data["category"],
             data["description"]
-    )    
+        )    

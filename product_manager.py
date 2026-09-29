@@ -48,15 +48,12 @@ class ProductManager:
                 return product
         return None
 
-    def search_by_category(self, category: str) -> list[Product] | None:
-        products_by_category = []
-        for product in self.products:
-            if product.category == category:
-                products_by_category.append(product)
-        if products_by_category:
-            return products_by_category
-        else:
-            return None
+    def search_by_category(self, category: str) -> list[Product]:
+        return [
+            product
+            for product in self.products
+            if product.category == category
+    ]
 
     def search_by_price_range(self, lower: float, upper: float) -> list[Product] | None:
         products_by_price = []

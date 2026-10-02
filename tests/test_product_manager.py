@@ -177,4 +177,3 @@ def test_search_by_price_range_not_found():
     result = manager.search_by_price_range(1,5)
 
     assert result == None
-  

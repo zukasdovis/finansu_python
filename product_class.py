@@ -1,17 +1,18 @@
 from dataclasses import dataclass
+
+
 @dataclass
 class Product:
-    
+
     name: str
     price: float
     category: str
     description: str
 
-
     def __post_init__(self):
-        if not isinstance(self.price, (int,float)):
+        if not isinstance(self.price, (int, float)):
             raise ValueError("Price must be a number")
-        
+
         if self.price < 0:
             raise ValueError("Price cannot be negative")
 
@@ -24,18 +25,13 @@ class Product:
         )
 
     def to_dict(self):
-        return{
-            'name': self.name,
-            'price': self.price,
-            'category': self.category,
-            'description': self.description
-            }
+        return {
+            "name": self.name,
+            "price": self.price,
+            "category": self.category,
+            "description": self.description,
+        }
 
     @classmethod
     def from_dict(cls, data):
-        return cls(
-            data["name"],
-            data["price"],
-            data["category"],
-            data["description"]
-        )    
+        return cls(data["name"], data["price"], data["category"], data["description"])

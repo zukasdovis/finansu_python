@@ -2,28 +2,26 @@ from importlib.resources import path
 import json
 from pathlib import Path
 from product_class import Product
- 
-class ProductManager:
 
+
+class ProductManager:
 
     def __init__(self, products_data: list[Product] | None = None):
         self.products: list[Product] = []
-        
+
         if products_data:
             for product_dict in products_data:
                 if isinstance(product_dict, dict):
                     product = Product(
-                        name=product_dict.get('name'),
-                        price=product_dict.get('price'),
-                        category=product_dict.get('category'),
-                        description=product_dict.get('description')
+                        name=product_dict.get("name"),
+                        price=product_dict.get("price"),
+                        category=product_dict.get("category"),
+                        description=product_dict.get("description"),
                     )
                     self.products.append(product)
                 elif isinstance(product_dict, Product):
                     self.products.append(product_dict)
 
-    
-    
     def add_product(self, product: Product) -> None:
         self.products.append(product)
 
@@ -49,22 +47,17 @@ class ProductManager:
         return None
 
     def search_by_category(self, category: str) -> list[Product]:
-        return [
-            product
-            for product in self.products
-            if product.category == category
-    ]
+        return [product for product in self.products if product.category == category]
 
     def search_by_price_range(self, lower: float, upper: float) -> list[Product] | None:
         products_by_price = []
         for product in self.products:
-            if product.price>=lower and product.price<=upper:
+            if product.price >= lower and product.price <= upper:
                 products_by_price.append(product)
         if products_by_price:
             return products_by_price
         else:
             return None
-
 
     def update_product(self):
         print("Products:")
@@ -73,14 +66,15 @@ class ProductManager:
             print(f"{i}. {product.name} - {product.price} - {product.category}")
 
         try:
-            choice = int(input("Enter the number of the product you want to update: ")) - 1
+            choice = (
+                int(input("Enter the number of the product you want to update: ")) - 1
+            )
         except ValueError:
             print("Invalid input. Please enter a number.")
             return
 
         if 0 <= choice < len(self.products):
 
-            
             try:
                 to_change = int(input("What to change: 1-name, 2-price, 3-category:"))
             except ValueError:
@@ -102,23 +96,26 @@ class ProductManager:
             print("Invalid choice. Please try again.")
 
     def sort_by_name_incr(self):
-        self.products.sort(key=lambda product: product.name)  
+        self.products.sort(key=lambda product: product.name)
+
     def sort_by_name_decr(self):
-        self.products.sort(key=lambda product: product.name, reverse=True) 
-        
+        self.products.sort(key=lambda product: product.name, reverse=True)
+
     def sort_by_price_incr(self):
-        self.products.sort(key=lambda product: product.price)  
+        self.products.sort(key=lambda product: product.price)
+
     def sort_by_price_decr(self):
-        self.products.sort(key=lambda product: product.price, reverse=True)  
+        self.products.sort(key=lambda product: product.price, reverse=True)
 
     def sort_by_category_incr(self):
-        self.products.sort(key=lambda product: product.category)  
+        self.products.sort(key=lambda product: product.category)
+
     def sort_by_category_decr(self):
-        self.products.sort(key=lambda product: product.category, reverse=True)  
-    
+        self.products.sort(key=lambda product: product.category, reverse=True)
+
     def get_total_products(self) -> int:
         return len(self.products)
-    
+
     def load_from_file(self, path: Path) -> None:
         if not path.exists():
             self.products = []
@@ -135,14 +132,9 @@ class ProductManager:
 
         self.products = [Product.from_dict(p) for p in data]
 
-
     def save_to_file(self, path: Path) -> None:
         if not path.parent.exists():
             path.parent.mkdir(parents=True, exist_ok=True)
 
         with path.open("w") as f:
-            json.dump(
-            [p.to_dict() for p in self.products],
-            f,
-            indent=4
-            )
+            json.dump([p.to_dict() for p in self.products], f, indent=4)

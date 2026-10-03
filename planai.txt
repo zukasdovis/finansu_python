@@ -1,2 +1,0 @@
-paziureti kategorijas
-better file handeling
